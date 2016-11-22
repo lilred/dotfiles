@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if
+	[ "$(command -v tmux)" ] && # tmux is installed
+	[ -z "$TMUX" ]           && # not inside tmux
+	[ "$TERM" != 'screen' ]  ;  # not inside screen
+then
+	tmux attach ||                  # attach to a session if it exists
+	exec tmux new-session && exit;  # otherwise, start a new one
+fi
