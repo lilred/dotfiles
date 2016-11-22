@@ -1,22 +1,25 @@
 set nocompatible                        " put the Improved in Vi Improved
 
-set rtp+=~/.vim/bundle/Vundle.vim       " 
-call vundle#begin()                     " 
-Plugin 'tpope/vim-sensible'             " 'a universal set of defaults that (hopefully) everyone can agree on'
-Plugin 'bling/vim-bufferline'           " show open buffers in command bar
-Plugin 'flazz/vim-colorschemes'         " syntax highlighting color pack
-Plugin 'fsharp/vim-fsharp'              " F# support
-Plugin 'racer-rust/vim-racer'           " Rust autocomplete support
-Plugin 'rust-lang/rust.vim'             " Rust support
-Plugin 'scrooloose/nerdtree'            " file system explorer
-Plugin 'sjl/gundo.vim'                  " 'super undo'
-Plugin 'tpope/vim-fugitive'             " git integration
-Plugin 'valloric/YouCompleteMe'         " autocomplete; slows down startup
-Plugin 'vim-airline/vim-airline'        " status line
-Plugin 'vim-airline/vim-airline-themes' " status line themes
-Plugin 'vim-syntastic/syntastic'        " error highlighting
-Plugin 'VundleVim/Vundle.vim'           " to prevent PluginClean from wiping out Vundle
-call vundle#end()                       " 
+
+if(!empty(glob("~/.vim/bundle/Vundle.vim")))
+	set runtimepath+=~/.vim/bundle/Vundle.vim " 
+	call vundle#begin()                     " 
+	Plugin 'bling/vim-bufferline'           " show open buffers in command bar
+	Plugin 'flazz/vim-colorschemes'         " syntax highlighting color pack
+	Plugin 'fsharp/vim-fsharp'              " F# support
+	Plugin 'racer-rust/vim-racer'           " Rust autocomplete support
+	Plugin 'rust-lang/rust.vim'             " Rust support
+	Plugin 'scrooloose/nerdtree'            " file system explorer
+	Plugin 'sjl/gundo.vim'                  " 'super undo'
+	Plugin 'tpope/vim-fugitive'             " git integration
+	Plugin 'valloric/YouCompleteMe'         " autocomplete; slows down startup
+	Plugin 'vim-airline/vim-airline'        " status line
+	Plugin 'vim-airline/vim-airline-themes' " status line themes
+	Plugin 'vim-syntastic/syntastic'        " error highlighting
+	Plugin 'VundleVim/Vundle.vim'           " to prevent PluginClean from wiping out Vundle
+	Plugin 'tpope/vim-sensible'             " 'a universal set of defaults that (hopefully) everyone can agree on'
+	call vundle#end()                       " 
+endif
 
 filetype off                            " toggle filetype support to refresh supported file types
 filetype plugin indent on               " 
@@ -65,11 +68,13 @@ nnoremap k gk
 " nnoremap gV `[v`]
 
 
-" 'super undo' using gundo
-nnoremap <leader>u :GundoToggle<CR>
-if has('python3')
-	let g:gundo_prefer_python3 = 1      " anything else breaks on Ubuntu 16.04+ 
-endif
+if(exists(":GundoToggle"))
+	" 'super undo' using gundo
+	nnoremap <leader>u :GundoToggle<CR>
+	if has('python3')
+		let g:gundo_prefer_python3 = 1      " anything else breaks on Ubuntu 16.04+ 
+	endif
+end
 
 " 'super save' (save current state)
 nnoremap <leader>s :mksession<CR>

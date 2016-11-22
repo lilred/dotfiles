@@ -9,7 +9,7 @@ case $- in
 esac
 
 # configure Vim
-(source $HOME/.initfiles/vim.init)
+source $HOME/.initfiles/vim.init
 
 # default to Vim
 VIM_PATH=`which vim`

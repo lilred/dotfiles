@@ -6,6 +6,6 @@ if [ ! -d "$VUNDLE_DIR" ] ; then
 	git clone https://github.com/VundleVim/Vundle.vim.git $VUNDLE_DIR;
 fi
 
-if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ] ; then
+if [ ! -d "$HOME/.vim/bundle/vim-sensible" ] ; then
 	vim +PluginInstall +qall
 fi
