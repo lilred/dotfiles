@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if 
+	[ -n "$SSH_CLIENT" ] &&
+	[ -z "$TMUX"       ] ;
+then
+	# set title
+	printf "\033k$USER@$HOSTNAME\033\\"
+	echo 1 >> foo.txt
+fi

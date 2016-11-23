@@ -7,7 +7,7 @@
 # the default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
 # Note: Bash on Windows does not currently apply umask properly.
-if [ `umask` = "0000" ]; then
+if [ "$(umask)" = "0000" ]; then
 	umask 022
 fi
 

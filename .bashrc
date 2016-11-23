@@ -8,19 +8,23 @@ case $- in
       *) return;;
 esac
 
+# SSH
+source "$HOME/.initfiles/ssh.init"
+
 # configure Vim
-source $HOME/.initfiles/vim.init
+source "$HOME/.initfiles/vim.init"
 
 # default to Vim
-VIM_PATH=`which vim`
+VIM_PATH=$(which vim)
 if [ -n "$VIM_PATH" ]; then
 	export VISUAL="$VIM_PATH"
 else
-	export VISUAL=`which vi`
+	export VISUAL
+	VISUAL=$(which vi)
 fi
 
 # open tmux
-source $HOME/.initfiles/tmux.init
+source "$HOME/.initfiles/tmux.init"
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
