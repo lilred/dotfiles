@@ -8,6 +8,9 @@
 !.tmux.conf
 !.vimrc
 
+!.aws
+!.aws/config
+
 !.config
 !.config/**
 
