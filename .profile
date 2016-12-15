@@ -11,6 +11,24 @@ if [ "$(umask)" = "0000" ]; then
 	umask 022
 fi
 
+if [ -n "$(command -v tmux)" ] ; then # tmux is installed
+	TPM_FOLDER="$HOME/.tmux/plugins/tpm"
+	if [ ! -d "$TPM_FOLDER" ] ; then
+		git clone 'https://github.com/tmux-plugins/tpm' "$TPM_FOLDER"
+		"$TPM_FOLDER/bin/install_plugins" > /dev/null
+	else
+		"$TPM_FOLDER/bin/update_plugins" "all" > /dev/null
+	fi
+fi
+
+if [ -n "$(command -v vim)" ] ; then # vim is installed
+	VUNDLE_DIR="$HOME/.vim/bundle/Vundle.vim";
+	if [ ! -d "$VUNDLE_DIR" ] ; then
+		git clone https://github.com/VundleVim/Vundle.vim.git $VUNDLE_DIR;
+	fi
+	vim +PluginInstall +qall
+fi
+
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
         export TERM='xterm-256color'
 else

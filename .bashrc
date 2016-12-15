@@ -8,23 +8,33 @@ case $- in
       *) return;;
 esac
 
-# SSH
-source "$HOME/.initfiles/ssh.init"
-
-# configure Vim
-source "$HOME/.initfiles/vim.init"
-
-# default to Vim
-VIM_PATH=$(which vim)
-if [ -n "$VIM_PATH" ]; then
-	export VISUAL="$VIM_PATH"
-else
-	export VISUAL
-	VISUAL=$(which vi)
+# if this is an SSH session, set title of shell to hostname
+if 
+	[ -n "$SSH_CLIENT" ] &&
+	[ -z "$TMUX"       ] ;
+then
+	# set title
+	printf "\033k$USER@$HOSTNAME\033\\"
 fi
 
-# open tmux
-source "$HOME/.initfiles/tmux.init"
+# start tmux
+if
+	[ -n "$(command -v tmux)" ] && # tmux is installed
+	[ -z "$TMUX" ]              && # not inside tmux
+	[ "$TERM" != 'screen' ]     ;  # not inside screen
+then
+	tmux attach 2> /dev/null ||     # attach to a session if it exists
+	exec tmux new-session && exit;  # otherwise, start a new one
+fi
+
+# default to Vim
+export VISUAL
+VIM_PATH=$(which vim)
+if [ -n "$VIM_PATH" ]; then
+	VISUAL="$VIM_PATH"
+else
+	VISUAL=$(which vi)
+fi
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
