@@ -5,7 +5,6 @@ call vundle#begin()                     "
 Plugin 'tpope/vim-sensible'             " 'a universal set of defaults that (hopefully) everyone can agree on'
 Plugin 'bling/vim-bufferline'           " show open buffers in command bar
 Plugin 'flazz/vim-colorschemes'         " syntax highlighting color pack
-Plugin 'fsharp/vim-fsharp'              " F# support
 Plugin 'scrooloose/nerdtree'            " file system explorer
 Plugin 'sjl/gundo.vim'                  " 'super undo'
 Plugin 'tpope/vim-fugitive'             " git integration
@@ -16,8 +15,18 @@ Plugin 'vim-syntastic/syntastic'        " error highlighting
 Plugin 'VundleVim/Vundle.vim'           " to prevent PluginClean from wiping out Vundle
 
 " Language support
-Plugin 'rust-lang/rust.vim'
-Plugin 'racer-rust/vim-racer'           " Rust autocomplete
+
+if(executable("fsharpc") || executable("fsc"))
+	Plugin 'fsharp/vim-fsharp'
+end
+
+if(executable("rustc"))
+	Plugin 'rust-lang/rust.vim'
+	if(executable("racer"))
+		Plugin 'racer-rust/vim-racer'
+		let $RUST_SRC_PATH = system("rustc --print sysroot")[:-2] . "/lib/rustlib/src/rust/src"
+	end
+end
 
 call vundle#end()                       " 
 filetype off                            " toggle filetype support to refresh supported file types
@@ -94,3 +103,4 @@ else
 	let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 	let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
