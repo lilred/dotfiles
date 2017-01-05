@@ -18,15 +18,15 @@ Plugin 'VundleVim/Vundle.vim'           " to prevent PluginClean from wiping out
 
 if(executable("fsharpc") || executable("fsc"))
 	Plugin 'fsharp/vim-fsharp'
-end
+endif
 
 if(executable("rustc"))
 	Plugin 'rust-lang/rust.vim'
 	if(executable("racer"))
 		Plugin 'racer-rust/vim-racer'
 		let $RUST_SRC_PATH = system("rustc --print sysroot")[:-2] . "/lib/rustlib/src/rust/src"
-	end
-end
+	endif
+endif
 
 call vundle#end()                       " 
 filetype off                            " toggle filetype support to refresh supported file types
@@ -82,7 +82,7 @@ if(exists(":GundoToggle"))
 	if has('python3')
 		let g:gundo_prefer_python3 = 1      " anything else breaks on Ubuntu 16.04+ 
 	endif
-end
+endif
 
 " 'super save' (save current state)
 nnoremap <leader>s :mksession<CR>
