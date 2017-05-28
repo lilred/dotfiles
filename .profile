@@ -27,7 +27,7 @@ if [ -n "$(command -v vim)" ] ; then # vim is installed
 	if [ ! -d "$VUNDLE_DIR" ] ; then
 		git clone https://github.com/VundleVim/Vundle.vim.git $VUNDLE_DIR;
 	fi
-	vim +PluginInstall +qall
+	#vim --not-a-term +PluginInstall +qall
 fi
 
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
