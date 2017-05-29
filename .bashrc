@@ -145,7 +145,7 @@ if
 then
 	TMUX_SESSION_ID=$(tmux ls | grep attached --invert-match | cut -d ":" -f1)
 	if [ -n "$TMUX_SESSION_ID" ] ; then
-		tmux attach -t "$TMUX_SESSION_ID"
+		tmux attach -t "$TMUX_SESSION_ID" && exit
 	else
 		exec tmux new-session && exit
 	fi
