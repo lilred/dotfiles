@@ -15,7 +15,9 @@ if [ -n "$(command -v tmux)" ] ; then # tmux is installed
 	TPM_FOLDER="$HOME/.tmux/plugins/tpm"
 	if [ ! -d "$TPM_FOLDER" ] ; then
 		git clone 'https://github.com/tmux-plugins/tpm' "$TPM_FOLDER"
-		tmux source-file $HOME/.tmux.conf
+		if [ -n "$TMUX" ] ; then
+			tmux source-file $HOME/.tmux.conf
+		fi
 		"$TPM_FOLDER/bin/install_plugins"
 	else
 		: #$TPM_FOLDER/bin/update_plugins" "all"
@@ -26,8 +28,8 @@ if [ -n "$(command -v vim)" ] ; then # vim is installed
 	VUNDLE_DIR="$HOME/.vim/bundle/Vundle.vim";
 	if [ ! -d "$VUNDLE_DIR" ] ; then
 		git clone https://github.com/VundleVim/Vundle.vim.git $VUNDLE_DIR;
+		vim --not-a-term +PluginInstall +qall
 	fi
-	#vim --not-a-term +PluginInstall +qall
 fi
 
 if [ -e /usr/share/terminfo/x/xterm-256color ]; then
