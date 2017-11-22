@@ -11,15 +11,8 @@
 !.aws
 !.aws/config
 
-!.config
-!.config/**
-
 !.initfiles
 !.initfiles/**
-
-# XXX this is inappropriate for work machines
-!.ssh
-!.ssh/authorized_keys
 
 !.stack
 !.stack/config.yaml
